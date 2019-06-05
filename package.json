@@ -1,0 +1,11 @@
+{
+  "name": "zendesk",
+  "version": "1.0.0",
+  "description": "Coding challenge for Zendesk internship",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Allan Applebee",
+  "license": "ISC"
+}
