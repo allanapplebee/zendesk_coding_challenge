@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <% ticketList.data.tickets.map(ticket => { %>
+            <p><%= ticket.subject %>
+                created by 
+                <%= ticket.requester_id  %>
+                on 
+                <%= ticket.created_at.slice(0, 10) %>
+            </p>
+           <% }) %> 
+        </p>
+    </body>
+</html>
