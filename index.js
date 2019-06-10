@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 
 //Routes
 app.get('/', (req, res) => {
-    res.send('hello')
+    res.render('home');
 });
 
 app.get('/listall', async (req, res) => {
