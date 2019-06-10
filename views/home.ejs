@@ -9,8 +9,8 @@
         </header>
         <p>Press the "List All" button to see all tickets, or enter a ticket numer to see individual ticket details</p>
         <a href="/listall">List All</a>
-        <form>
-            <input type="number" placeholder="ticket number">
+        <form action='/showticket' method="POST">
+            <input type="number" name="id" placeholder="ticket number">
             <button>Request Ticket</button>
         </form>
     </body>
