@@ -18,25 +18,32 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+//
+const auth = {
+    username: process.env.EMAIL,
+    password: process.env.PASSWORD
+};
+
 //Routes
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', {url: process.env.URL});
 });
 
-app.get('/listall', async (req, res) => {
-    
+app.post('/listall', async (req, res) => {
+    if(req.body.url) {
+        url = req.body.url;
+    } else {
+        url = process.env.URL;
+    }
     try {
-        const ticketList = await axios.get(process.env.URL, {
-            auth: {
-                username: process.env.EMAIL,
-                password: process.env.PASSWORD
-            },
+        const tickets = await axios.get(url, {
+            auth: auth,
             params: {
                 per_page: 25
             }
         });
-        console.log(ticketList)
-        res.render('listAllTickets', {ticketList: ticketList});
+        console.log(tickets);
+        res.render('listAllTickets', {ticketList: tickets});
     } catch (err) {
         console.log(err);
     }
@@ -47,37 +54,14 @@ app.post('/showticket', async (req, res) => {
         let id = req.body.id
         let url = `https://allanapplebee.zendesk.com/api/v2/tickets/${id}.json`;
         const ticket = await axios.get(url, {
-            auth: {
-                username: process.env.EMAIL,
-                password: process.env.PASSWORD
-            }
-        })
+            auth: auth
+        });
         console.log(id)
-        res.render('showTicket', {ticket: ticket})
+        res.render('showTicket', {ticket: ticket});
     } catch(err){
-        console.log(err)
+        console.log(err);
     }
-})
-
-app.post('/listall/page', async (req, res) => {
-    try {
-        let url = req.body.url;
-        const nextPage = await axios.get(url, {
-            auth: {
-                username: process.env.EMAIL,
-                password: process.env.PASSWORD
-            },
-            params: {
-                per_page: 25
-            }
-        })
-        // console.log(id)
-        res.render('listAllTickets', {ticketList: nextPage})
-    } catch(err){
-        console.log(err)
-    }
-})
-// listAllTickets();
+});
 
 app.listen(port, IP, () => {
     console.log("Server Has Started...");
