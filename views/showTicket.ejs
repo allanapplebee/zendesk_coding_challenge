@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-
-    </head>
+<% include ./partials/header %>
     <body>
-        <h1>Details for ticket with ID <%= ticket.data.ticket.id %></h1>
-        <p>Subject: <%= ticket.data.ticket.subject %></p>
-        <p>Description: <%= ticket.data.ticket.description %></p>
-        <p>Status: <%= ticket.data.ticket.status %></p>
+        <h1>Details for ticket with ID <%= ticket.id %></h1>
+        <p>Subject: <%= ticket.subject %></p>
+        <p>Description: <%= ticket.description %></p>
+        <p>Status: <%= ticket.status %></p>
         <a href="/">Home</a>
     </body>
 </html>

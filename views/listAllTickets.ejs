@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-
-    </head>
+<% include ./partials/header %>
     <body>
-        <% ticketList.data.tickets.map(ticket => { %>
+        <% ticketList.tickets.map(ticket => { %>
             <p><%= ticket.subject %>
                 created by 
                 <%= ticket.requester_id  %>
@@ -15,15 +11,15 @@
             </p>
            <% }) %> 
 
-        <% if(ticketList.data.next_page !== null) { %>
+        <% if(ticketList.next_page !== null) { %>
         <form action="/listall" method="POST">
-           <input type="hidden" name="url" value=<%= ticketList.data.next_page %>>
+           <input type="hidden" name="url" value=<%= ticketList.next_page %>>
            <button type="submit">Next Page</button>
        </form>
        <% } %>
-       <% if(ticketList.data.previous_page !== null) { %>
+       <% if(ticketList.previous_page !== null) { %>
        <form action="/listall" method="POST">
-            <input type="hidden" name="url" value=<%= ticketList.data.previous_page %>>
+            <input type="hidden" name="url" value=<%= ticketList.previous_page %>>
             <button type="submit">Previous Page</button>
         </form> 
         <% } %>

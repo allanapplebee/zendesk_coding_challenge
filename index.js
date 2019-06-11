@@ -42,8 +42,7 @@ app.post('/listall', async (req, res) => {
                 per_page: 25
             }
         });
-        console.log(tickets);
-        res.render('listAllTickets', {ticketList: tickets});
+        res.render('listAllTickets', {ticketList: tickets.data});
     } catch (err) {
         console.log(err);
     }
@@ -56,13 +55,13 @@ app.post('/showticket', async (req, res) => {
         const ticket = await axios.get(url, {
             auth: auth
         });
-        console.log(id)
-        res.render('showTicket', {ticket: ticket});
+        res.render('showTicket', {ticket: ticket.data.ticket});
     } catch(err){
         console.log(err);
     }
 });
 
+//start server
 app.listen(port, IP, () => {
-    console.log("Server Has Started...");
+    console.log(`Server Has Started on port ${port}`);
  });
