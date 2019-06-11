@@ -34,7 +34,7 @@ app.get('/listall', async (req, res) => {
                 per_page: 25
             }
         });
-        console.log(ticketList.data.tickets[1])
+        console.log(ticketList.data)
         res.render('listAllTickets', {ticketList: ticketList});
     } catch (err) {
         console.log(err);
@@ -58,6 +58,24 @@ app.post('/showticket', async (req, res) => {
     }
 })
 
+app.post('/listall/next', async (req, res) => {
+    try {
+        let url = req.body.url;
+        const nextPage = await axios.get(url, {
+            auth: {
+                username: process.env.EMAIL,
+                password: process.env.PASSWORD
+            },
+            params: {
+                per_page: 25
+            }
+        })
+        // console.log(id)
+        res.render('listAllTickets', {ticketList: nextPage})
+    } catch(err){
+        console.log(err)
+    }
+})
 // listAllTickets();
 
 app.listen(port, IP, () => {

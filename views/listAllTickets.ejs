@@ -14,7 +14,10 @@
                 <%= ticket.id %>
             </p>
            <% }) %> 
-        </p>
+        <form action="/listall/next" method="POST">
+           <input type="hidden" name="url" value=<%= ticketList.data.next_page %>>
+           <button type="submit">Next Page</button>
+       </form>
         <a href="/">Home</a>
     </body>
 </html>
