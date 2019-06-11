@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/listall', async (req, res) => {
+    
     try {
         const ticketList = await axios.get(process.env.URL, {
             auth: {
@@ -34,7 +35,7 @@ app.get('/listall', async (req, res) => {
                 per_page: 25
             }
         });
-        console.log(ticketList.data)
+        console.log(ticketList)
         res.render('listAllTickets', {ticketList: ticketList});
     } catch (err) {
         console.log(err);
@@ -58,7 +59,7 @@ app.post('/showticket', async (req, res) => {
     }
 })
 
-app.post('/listall/next', async (req, res) => {
+app.post('/listall/page', async (req, res) => {
     try {
         let url = req.body.url;
         const nextPage = await axios.get(url, {

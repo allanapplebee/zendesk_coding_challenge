@@ -14,10 +14,19 @@
                 <%= ticket.id %>
             </p>
            <% }) %> 
-        <form action="/listall/next" method="POST">
+
+        <% if(ticketList.data.next_page !== null) { %>
+        <form action="/listall/page" method="POST">
            <input type="hidden" name="url" value=<%= ticketList.data.next_page %>>
            <button type="submit">Next Page</button>
        </form>
+       <% } %>
+       <% if(ticketList.data.previous_page !== null) { %>
+       <form action="/listall/page" method="POST">
+            <input type="hidden" name="url" value=<%= ticketList.data.previous_page %>>
+            <button type="submit">Previous Page</button>
+        </form> 
+        <% } %>
         <a href="/">Home</a>
     </body>
 </html>
