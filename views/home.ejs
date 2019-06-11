@@ -1,16 +1,22 @@
 <% include ./partials/header %>
     <body>
-        <header>
-            <h1>Zendesk Ticket Viewer</h1>
-        </header>
-        <p>Press the "List All" button to see all tickets, or enter a ticket numer to see individual ticket details</p>
-        <form action="/listall" method="POST">
-            <input type="hidden" name="url" value=<%= url %>>
-            <button type="submit">List All</button>
-        </form>
-        <form action='/showticket' method="POST">
-            <input type="number" name="id" placeholder="ticket number">
-            <button>Request Ticket</button>
-        </form>
+        <div class="container">
+            <% include ./partials/jumbotron %>
+            <p>Press the "List All" button to see all tickets, or enter a ticket numer to see individual ticket details</p>
+            <div class="row">
+                <div class="col">
+                    <form action="/listall" method="POST">
+                        <input type="hidden" name="url" value=<%= url %>>
+                        <button class="btn btn-primary" type="submit">List All</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <form action='/showticket' method="POST">
+                        <input  class="form-control" type="number" name="id" placeholder="ticket number">
+                        <button class="btn btn-primary" type="submit">Request Ticket</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

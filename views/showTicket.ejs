@@ -1,9 +1,12 @@
 <% include ./partials/header %>
     <body>
-        <h1>Details for ticket with ID <%= ticket.id %></h1>
-        <p>Subject: <%= ticket.subject %></p>
-        <p>Description: <%= ticket.description %></p>
-        <p>Status: <%= ticket.status %></p>
-        <a href="/">Home</a>
+        <div class="container">
+            <% include ./partials/jumbotron %>
+            <h3>Details for ticket with ID <%= ticket.id %></h3>
+            <p><strong>Subject:</strong> <%= ticket.subject %></p>
+            <p><strong>Description:</strong> <%= ticket.description %></p>
+            <p><strong>Status:</strong> <%= ticket.status %></p>
+            <a href="/" class="btn btn-primary">Home</a>
+        </div>
     </body>
 </html>

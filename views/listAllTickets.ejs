@@ -1,28 +1,41 @@
 <% include ./partials/header %>
     <body>
-        <% ticketList.tickets.map(ticket => { %>
-            <p><%= ticket.subject %>
-                created by 
-                <%= ticket.requester_id  %>
-                on 
-                <%= ticket.created_at.slice(0, 10) %>
-                with ID
-                <%= ticket.id %>
-            </p>
-           <% }) %> 
-
-        <% if(ticketList.next_page !== null) { %>
-        <form action="/listall" method="POST">
-           <input type="hidden" name="url" value=<%= ticketList.next_page %>>
-           <button type="submit">Next Page</button>
-       </form>
-       <% } %>
-       <% if(ticketList.previous_page !== null) { %>
-       <form action="/listall" method="POST">
-            <input type="hidden" name="url" value=<%= ticketList.previous_page %>>
-            <button type="submit">Previous Page</button>
-        </form> 
-        <% } %>
-        <a href="/">Home</a>
+        <div class="container">
+            <% include ./partials/jumbotron %>
+            <% ticketList.tickets.map(ticket => { %>
+                <p><%= ticket.subject %>
+                    created by 
+                    <%= ticket.requester_id  %>
+                    on 
+                    <%= ticket.created_at.slice(0, 10) %>
+                    with ID
+                    <%= ticket.id %>
+                </p>
+            <% }) %> 
+            
+            <div class="row">
+                <div class="col">
+                    <% if(ticketList.previous_page !== null) { %>
+                        <form action="/listall" method="POST">
+                            <input type="hidden" name="url" value=<%= ticketList.previous_page %>>
+                            <button type="submit" class="btn btn-primary">Previous Page</button>
+                        </form> 
+                    <% } %>
+                </div>
+                <div class="col">
+                    <% if(ticketList.next_page !== null) { %>
+                        <form action="/listall" method="POST">
+                            <input type="hidden" name="url" value=<%= ticketList.next_page %>>
+                            <button type="submit" class="btn btn-primary pull-right">Next Page</button>
+                        </form>
+                    <% } %>  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                <a href="/" class="btn btn-primary">Home</a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
