@@ -12,14 +12,17 @@ describe('Unit testing routes return correct response codes', () => {
             .end((err, res) => {
                 res.should.have.status(200);
                 res.text.should.include(process.env.URL);
+                console.log(res.body)
                 done();
             });
     });
     it('post /listall should return OK status', (done) => {
         chai.request(app)
             .post('/listall')
+            .send({'url': 'next_page'})
             .end((err, res) => {
                 res.should.have.status(200);
+                console.log(res.body);
                 done();
             });
     });

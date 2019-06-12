@@ -24,6 +24,22 @@ const auth = {
     password: process.env.PASSWORD
 };
 
+GetTickets = {
+    getAll: async (url) => {
+        try {
+            const response = await axios.get(url, {
+                auth: auth,
+                params: {
+                    per_page: 25
+                }
+            });
+            return response.data
+        } catch(err) { 
+            throw new Error("something went wrong")
+        }
+    }
+}
+
 //Routes
 app.get('/', (req, res) => {
     res.render('home', {url: process.env.URL});
@@ -32,20 +48,10 @@ app.get('/', (req, res) => {
 app.post('/listall', async (req, res) => {
     let url = req.body.url;
     try {
-        const tickets = await axios.get(url, {
-            auth: auth,
-            params: {
-                per_page: 25
-            }
-        });
-        res.render('listAllTickets', {ticketList: tickets.data});
+        const tickets = await GetTickets.getAll(url);
+        res.render('listAllTickets', {ticketList: tickets});
     } catch (err) {
-        //check to see if there is a response from the API and render relevant error page
-        if(err.response) {
-            res.render('error', {error: err.response.status});
-        } else {
-            res.render('serverError')
-        }
+        res.render('error');
     }
 });
 
@@ -53,17 +59,10 @@ app.post('/showticket', async (req, res) => {
     let id = req.body.id;
     let url = `https://allanapplebee.zendesk.com/api/v2/tickets/${id}.json`;
     try {
-        const ticket = await axios.get(url, {
-            auth: auth
-        });
-        res.render('showTicket', {ticket: ticket.data.ticket});
+        const ticket = await GetTickets.getAll(url);
+        res.render('showTicket', {ticket: ticket.ticket});
     } catch (err){
-        //check to see if there is a response from the API and render relevant error page
-        if(err.response) {
-            res.render('error', {error: err.response.status});
-        } else {
-            res.render('serverError')
-        }
+        res.render('error');
     }
 });
 
@@ -73,4 +72,4 @@ app.listen(port, IP, () => {
  });
 
  //export app and axios requests for testing
- module.exports = { app, ticket, tickets };
+ module.exports = app;
