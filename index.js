@@ -29,12 +29,8 @@ app.get('/', (req, res) => {
     res.render('home', {url: process.env.URL});
 });
 
-app.post('/listall', async (req, res) => {
-    if(req.body.url) {
-        url = req.body.url;
-    } else {
-        url = process.env.URL;
-    }
+app.post('/listall', async (req, res, next) => {
+    let url = req.body.url;
     try {
         const tickets = await axios.get(url, {
             auth: auth,
@@ -44,20 +40,20 @@ app.post('/listall', async (req, res) => {
         });
         res.render('listAllTickets', {ticketList: tickets.data});
     } catch (err) {
-        console.log(err);
+        res.render('error');
     }
 });
 
 app.post('/showticket', async (req, res) => {
+    let id = req.body.id;
+    let url = `https://allanapplebee.zendesk.com/api/v2/tickets/${id}.json`;
     try {
-        let id = req.body.id
-        let url = `https://allanapplebee.zendesk.com/api/v2/tickets/${id}.json`;
         const ticket = await axios.get(url, {
             auth: auth
         });
         res.render('showTicket', {ticket: ticket.data.ticket});
-    } catch(err){
-        console.log(err);
+    } catch (err){
+        res.render('error');
     }
 });
 
