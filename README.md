@@ -25,6 +25,7 @@ To run tests
 ```sh
 $ npm run test
 ```
+A quick note on the tests. Testing is not my forte, so I have only included some very basic tests - checking some status codes and checking the API call returns the required data.
 
 ## Design Decisions
 I initially considered building a React app, but decided that this was overkill for such a simple app - too much bloat and unnecessary complexity and functionality.  
