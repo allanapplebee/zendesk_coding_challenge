@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-//
+//helpers
 const auth = {
     username: process.env.EMAIL,
     password: process.env.PASSWORD
@@ -40,7 +40,12 @@ app.post('/listall', async (req, res, next) => {
         });
         res.render('listAllTickets', {ticketList: tickets.data});
     } catch (err) {
-        res.render('error');
+        //check to see if there is a response from the API and render relevant error page
+        if(err.response) {
+            res.render('error', {error: err.response.status});
+        } else {
+            res.render('serverError')
+        }
     }
 });
 
@@ -53,7 +58,12 @@ app.post('/showticket', async (req, res) => {
         });
         res.render('showTicket', {ticket: ticket.data.ticket});
     } catch (err){
-        res.render('error');
+        //check to see if there is a response from the API and render relevant error page
+        if(err.response) {
+            res.render('error', {error: err.response.status});
+        } else {
+            res.render('serverError')
+        }
     }
 });
 
