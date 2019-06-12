@@ -4,7 +4,8 @@
   "description": "Coding challenge for Zendesk internship",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha tests/**/*.js --exit"
   },
   "author": "Allan Applebee",
   "license": "ISC",
@@ -13,5 +14,10 @@
     "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4"
   }
 }

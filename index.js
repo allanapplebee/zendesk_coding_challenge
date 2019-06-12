@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.render('home', {url: process.env.URL});
 });
 
-app.post('/listall', async (req, res, next) => {
+app.post('/listall', async (req, res) => {
     let url = req.body.url;
     try {
         const tickets = await axios.get(url, {
@@ -71,3 +71,6 @@ app.post('/showticket', async (req, res) => {
 app.listen(port, IP, () => {
     console.log(`Server Has Started on port ${port}`);
  });
+
+ //export app and axios requests for testing
+ module.exports = { app, ticket, tickets };
