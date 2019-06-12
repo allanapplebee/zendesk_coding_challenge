@@ -2,7 +2,7 @@
     <body>
         <div class="container">
             <% include ./partials/jumbotron %>
-            <% ticketList.tickets.map(ticket => { %>
+            <% tickets.tickets.map(ticket => { %>
                 <p><%= ticket.subject %>
                     created by 
                     <%= ticket.requester_id  %>
@@ -15,17 +15,17 @@
             
             <div class="row">
                 <div class="col">
-                    <% if(ticketList.previous_page !== null) { %>
+                    <% if(tickets.previous_page !== null) { %>
                         <form action="/listall" method="POST">
-                            <input type="hidden" name="url" value=<%= ticketList.previous_page %>>
+                            <input type="hidden" name="url" value=<%= tickets.previous_page %>>
                             <button type="submit" class="btn btn-primary">Previous Page</button>
                         </form> 
                     <% } %>
                 </div>
                 <div class="col">
-                    <% if(ticketList.next_page !== null) { %>
+                    <% if(tickets.next_page !== null) { %>
                         <form action="/listall" method="POST">
-                            <input type="hidden" name="url" value=<%= ticketList.next_page %>>
+                            <input type="hidden" name="url" value=<%= tickets.next_page %>>
                             <button type="submit" class="btn btn-primary pull-right">Next Page</button>
                         </form>
                     <% } %>  
